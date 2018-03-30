@@ -23,11 +23,11 @@ form = """<!DOCTYPE html>
         </style>
     </head>
     <body>
-    <form action="web-caesar.html" method="POST">
+    <form method="POST">
         <label for>
-            <input type = "text" name = "rot" value = 0>
+            <input type = "text" name = "rot" value = "0" />
         </label>
-        <textarea name = "text">{0} </textarea>
+        <textarea name = "text"> {0} </textarea>
         <input type="submit" value="Submit">
     </form>
     </body>
@@ -35,12 +35,13 @@ form = """<!DOCTYPE html>
 @app.route("/")
 def index():
     return form
+
+   
+@app.route("/", methods = ['POST'])
 def encrypt():
    text = request.form['text']
    
    rot = int(request.form['rot'])
-   return "<h1>" + rotate_string(text, rot) + "<h1>" 
-   
-@app.route("/", methods = ['POST'])   
+   return "<h1>" + rotate_string(text, rot) + "</h1>"
 
 app.run() 
